@@ -11,10 +11,10 @@ export class AppComponent implements OnInit{
 
   constructor(private interfaceService: InterfaceService){
     window.addEventListener('devicemotion', function(event) {
-      let x = event.accelerationIncludingGravity.x;
-      let y = event.accelerationIncludingGravity.y;
-      let z = event.accelerationIncludingGravity.z;
-      let rot = event.rotationRate;
+      const x = event.accelerationIncludingGravity.x;
+      const y = event.accelerationIncludingGravity.y;
+      const z = event.accelerationIncludingGravity.z;
+      const rot = event.rotationRate;
       interfaceService.sendMsg({
         type: 'motion',
         x: x,
@@ -25,9 +25,9 @@ export class AppComponent implements OnInit{
     }, true);
 
     window.addEventListener('deviceorientation', function(event) {
-      let alpha = event.alpha;
-      let beta = event.beta;
-      let gamma = event.gamma;
+      const alpha = event.alpha;
+      const beta = event.beta;
+      const gamma = event.gamma;
       interfaceService.sendMsg({
         type: 'orientation',
         alpha: alpha,
@@ -54,10 +54,6 @@ export class AppComponent implements OnInit{
   }
 
   ngOnInit() {
-  }
-
-  sendMessage(msg) {
-    this.interfaceService.sendMsg("Test Message" + msg);
   }
 
 }

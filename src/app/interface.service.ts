@@ -13,7 +13,7 @@ export class InterfaceService {
       .connect()
       .map((response: any): any => {
         return response;
-      })
+      });
   }
 
   // Our simplified interface for sending
