@@ -10,3 +10,9 @@ and sends it to a websocket server.
 ## How to use?
 
 Open it on a browser on your mobile phone. Use Firefox to have access to more sensors.
+
+## I want it!
+
+Accessible at
+
+[mandarini.github.io/m](https://mandarini.github.io/m/)
