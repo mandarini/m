@@ -59,9 +59,9 @@ Here we are also specifying a port, because we will be also running the laptop a
 Open a browser on your mobile phone (preferably chrome of firefox for more sensors) and navigate to your locally IP
 address (the one we found before, running `ifconfig`), on port 4200.
 
-### You need, now, the desktop app!
+### You need, now, the web app for the laptop/desktop browser
 
-1. Download and run the nodejs websocket server:
+1. Download the app
 
 ```
 git clone git@github.com:mandarini/im.git
@@ -74,7 +74,10 @@ Go to line 16 in the `websocket.service.ts` file and change
 where `xx.xx.xx.xx` your local address and `5000` the port that our server is listening to
 (see the `app.js` file in the wsserver project).
 
-3. ng server
+3. Run the app
+```
+ng serve
+```
 
 4. Open a browser and navigate to `http://localhost:4200`
 
