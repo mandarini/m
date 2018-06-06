@@ -10,7 +10,7 @@ import { GuidService } from './guid.service';
 export class AppComponent implements OnInit{
   title = 'app';
   private logged: boolean;
-  private guid: string;
+  private uuid: string;
 
   constructor(private interfaceService: InterfaceService){
     this.logged = false;
@@ -21,6 +21,7 @@ export class AppComponent implements OnInit{
       const rot = event.rotationRate;
       if (this.logged) {
         interfaceService.sendMsg({
+          uuid: this.uuid,
           type: 'motion',
           x: x,
           y: y,
@@ -36,6 +37,7 @@ export class AppComponent implements OnInit{
       const gamma = event.gamma;
       if (this.logged) {
         interfaceService.sendMsg({
+          uuid: this.uuid,
           type: 'orientation',
           alpha: alpha,
           beta: beta,
@@ -48,6 +50,7 @@ export class AppComponent implements OnInit{
       console.log(event.value);
       if (this.logged) {
         interfaceService.sendMsg({
+          uuid: this.uuid,
           type: 'light',
           light: event.value
         });
@@ -58,6 +61,7 @@ export class AppComponent implements OnInit{
       // console.log("value: " + event.value, "max: " + event.max, "min: " + event.min);
       if (this.logged) {
         interfaceService.sendMsg({
+          uuid: this.uuid,
           type: 'proximity',
           proximity: event,
         });
@@ -69,8 +73,8 @@ export class AppComponent implements OnInit{
   }
 
   login() {
-   this.guid =  GuidService.newGuid();
-   console.log(this.guid);
+   this.uuid =  GuidService.newGuid();
+   console.log(this.uuid);
    this.logged = true;
   }
 
