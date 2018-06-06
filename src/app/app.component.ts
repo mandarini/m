@@ -8,7 +8,7 @@ import { GuidService } from './guid.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit{
-  private logged: boolean;
+  logged: boolean;
   private uuid: string;
 
   constructor(private interfaceService: InterfaceService) {
