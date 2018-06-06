@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {InterfaceService } from './interface.service';
+import { InterfaceService } from './interface.service';
 import { GuidService } from './guid.service';
 
 @Component({
@@ -8,11 +8,10 @@ import { GuidService } from './guid.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit{
-  title = 'app';
   private logged: boolean;
   private uuid: string;
 
-  constructor(private interfaceService: InterfaceService){
+  constructor(private interfaceService: InterfaceService) {
     this.logged = false;
     window.addEventListener('devicemotion', (event) => {
       const x = event.accelerationIncludingGravity.x;
@@ -47,7 +46,7 @@ export class AppComponent implements OnInit{
     }, true);
 
     window.addEventListener('devicelight', (event) => {
-      console.log(event.value);
+      // console.log(event.value);
       if (this.logged) {
         interfaceService.sendMsg({
           uuid: this.uuid,
@@ -78,8 +77,12 @@ export class AppComponent implements OnInit{
    this.logged = true;
   }
 
-  logout() {
+  logout(): void {
     this.logged = false;
+    this.interfaceService.sendMsg({
+      uuid: this.uuid,
+      type: 'logout'
+    });
   }
 
 }
