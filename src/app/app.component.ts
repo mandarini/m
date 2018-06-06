@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {InterfaceService } from './interface.service';
+import { GuidService } from './guid.service';
 
 @Component({
   selector: 'app-root',
@@ -8,52 +9,73 @@ import {InterfaceService } from './interface.service';
 })
 export class AppComponent implements OnInit{
   title = 'app';
+  private logged: boolean;
+  private guid: string;
 
   constructor(private interfaceService: InterfaceService){
-    window.addEventListener('devicemotion', function(event) {
+    this.logged = false;
+    window.addEventListener('devicemotion', (event) => {
       const x = event.accelerationIncludingGravity.x;
       const y = event.accelerationIncludingGravity.y;
       const z = event.accelerationIncludingGravity.z;
       const rot = event.rotationRate;
-      interfaceService.sendMsg({
-        type: 'motion',
-        x: x,
-        y: y,
-        z: z,
-        rot: rot
-      });
+      if (this.logged) {
+        interfaceService.sendMsg({
+          type: 'motion',
+          x: x,
+          y: y,
+          z: z,
+          rot: rot
+        });
+      }
     }, true);
 
-    window.addEventListener('deviceorientation', function(event) {
+    window.addEventListener('deviceorientation', (event) => {
       const alpha = event.alpha;
       const beta = event.beta;
       const gamma = event.gamma;
-      interfaceService.sendMsg({
-        type: 'orientation',
-        alpha: alpha,
-        beta: beta,
-        gamma: gamma,
-      });
+      if (this.logged) {
+        interfaceService.sendMsg({
+          type: 'orientation',
+          alpha: alpha,
+          beta: beta,
+          gamma: gamma,
+        });
+      }
     }, true);
 
-    window.addEventListener('devicelight', function(event) {
+    window.addEventListener('devicelight', (event) => {
       console.log(event.value);
-      interfaceService.sendMsg({
-        type: 'light',
-        light: event.value
-      });
+      if (this.logged) {
+        interfaceService.sendMsg({
+          type: 'light',
+          light: event.value
+        });
+      }
     }, true);
 
-    window.addEventListener('deviceproximity', function(event) {
+    window.addEventListener('deviceproximity', (event) => {
       // console.log("value: " + event.value, "max: " + event.max, "min: " + event.min);
-      interfaceService.sendMsg({
-        type: 'proximity',
-        proximity: event,
-      });
+      if (this.logged) {
+        interfaceService.sendMsg({
+          type: 'proximity',
+          proximity: event,
+        });
+      }
     });
   }
 
   ngOnInit() {
+  }
+
+  login() {
+   this.guid =  GuidService.newGuid();
+   console.log(this.guid);
+   this.logged = true;
+  }
+
+  logout() {
+    this.logged = false;
   }
 
 }

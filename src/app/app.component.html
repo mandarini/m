@@ -1,1 +1,4 @@
 <h1>Server loaded ok!</h1>
+<button (click)="login()" *ngIf="!logged">Log IN</button>
+<button (click)="logout()" *ngIf="logged">Log out</button>
+<h3 *ngIf="logged">successfull log in</h3>
